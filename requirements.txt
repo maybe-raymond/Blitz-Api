@@ -1,0 +1,8 @@
+flask
+flask_restful
+flask_sqlalchemy
+flask_marshmallow
+celery
+sqlalchemy
+requests
+bs4
