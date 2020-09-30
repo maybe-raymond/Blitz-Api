@@ -78,30 +78,28 @@ def data_entry_NewsDay():
 
 def data_entry_Exchange_Rate_data():
     d = Exchange_Rate_data()
-    if (all_check(Exchange_rate, "zimrates")):
-        data = d.rate()
-        zimrates = Exchange_rate(name= "zimrates", rtgs=float(str(data.p.text).split("(zimrates.com)")[0].split("ZWL$")[1]) )
-        db.session.add(zimrates)
-        OMIR = Exchange_rate(name="OMIR" , rtgs=float(str(data.p.text).split('OMIR')[1].split("USD")[0]) )
-        db.session.add(OMIR )
-        interbank = Exchange_rate(name="interbank" , rtgs= float(str(data.p.text).split("(interbank)")[0].split(" ZWL$")[2]))
-        db.session.add(interbank)
-        zimrates_bond = Exchange_rate(name="zimrates_bond" , rtgs=float(str(data.p.text).split("(zimrates.com)")[1].split("BOND")[1]))
-        db.session.add(zimrates_bond)
-        bluemari_info = Exchange_rate(name="bluemari.info" , rtgs= float(str(data.p.text).split("(bluemari.info)")[0].split("ZWL$")[3]))
-        db.session.add(bluemari_info)
-        db.session.commit()
+    data = d.rate()
+    zimrates = Exchange_rate(name= "zimrates", rtgs=float(str(data.p.text).split("(zimrates.com)")[0].split("ZWL$")[1]) )
+    db.session.add(zimrates)
+    OMIR = Exchange_rate(name="OMIR" , rtgs=float(str(data.p.text).split('OMIR')[1].split("USD")[0]) )
+    db.session.add(OMIR )
+    interbank = Exchange_rate(name="interbank" , rtgs= float(str(data.p.text).split("(interbank)")[0].split(" ZWL$")[2]))
+    db.session.add(interbank)
+    zimrates_bond = Exchange_rate(name="zimrates_bond" , rtgs=float(str(data.p.text).split("(zimrates.com)")[1].split("BOND")[1]))
+    db.session.add(zimrates_bond)
+    bluemari_info = Exchange_rate(name="bluemari.info" , rtgs= float(str(data.p.text).split("(bluemari.info)")[0].split("ZWL$")[3]))
+    db.session.add(bluemari_info)
+    db.session.commit()
 
 
 
 
 def data_entry_Covid_API():
     cov = Covid_API()
-    if (all_check(Covid, 0)):
-        c19=  cov.data()
-        C = Covid(cases =int(c19["confirmed"]), death= int(c19["deaths"]), recovery=int(c19["recovered"]), active=int(c19["active"]))
-        db.session.add(C)
-        db.session.commit()
+    c19=  cov.data()
+    C = Covid(cases =int(c19["confirmed"]), death= int(c19["deaths"]), recovery=int(c19["recovered"]), active=int(c19["active"]))
+    db.session.add(C)
+    db.session.commit()
 
 @celery.task
 def Get_data():
