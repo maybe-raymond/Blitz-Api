@@ -55,5 +55,3 @@ api.add_resource(Exchange, "/Exchange/<type>", "/Exchange")
 @app.route("/")
 def Start_up():
     Get_data()
-
-Start_up()
