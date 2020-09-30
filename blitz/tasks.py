@@ -95,11 +95,15 @@ def data_entry_Exchange_Rate_data():
 
 
 def data_entry_Covid_API():
-    cov = Covid_API()
-    c19=  cov.data()
-    C = Covid(cases =int(c19["confirmed"]), death= int(c19["deaths"]), recovery=int(c19["recovered"]), active=int(c19["active"]))
-    db.session.add(C)
-    db.session.commit()
+    try:
+        cov = Covid_API()
+        c19=  cov.data()
+        C = Covid(cases =int(c19["confirmed"]), death= int(c19["deaths"]), recovery=int(c19["recovered"]), active=int(c19["active"]))
+        db.session.add(C)
+        db.session.commit()
+    except:
+        print("error") 
+
 
 @celery.task
 def Get_data():
