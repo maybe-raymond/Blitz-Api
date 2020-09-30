@@ -51,7 +51,7 @@ api.add_resource(Articles, "/Articles", "/Articles/<name>")
 api.add_resource(Covid_results, "/Covid")
 api.add_resource(Exchange, "/Exchange/<type>", "/Exchange")
 
-@app.route("/")
+@app.route("/exit()")
 def Start_up():
     Get_data()
 
